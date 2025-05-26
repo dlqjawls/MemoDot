@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../core/constants.dart';
-import '../models/memo_model.dart';
+import 'package:memodot/core/constants.dart';
+import 'package:memodot/models/memo_model.dart';
 
 class MemoService extends ChangeNotifier {
   final Dio _dio = Dio(

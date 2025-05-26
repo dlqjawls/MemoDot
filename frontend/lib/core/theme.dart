@@ -1,13 +1,31 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // 색상 정의
-  static const Color primaryColor = Color(0xFFFFD600); // 노란색
-  static const Color secondaryColor = Color(0xFF2196F3); // 파란색
+  // 기본 색상 정의
+  static const Color primaryColor = Colors.black; // 검정색
+  static const Color secondaryColor = Colors.white; // 흰색
   static const Color backgroundColor = Colors.white;
-  static const Color textColor = Color(0xFF212121);
-  static const Color subtleTextColor = Color(0xFF757575);
+  static const Color textColor = Colors.black;
+  static const Color subtleTextColor = Color(0xFF757575); // 회색
+
+  // 에러 색상
   static const Color errorColor = Color(0xFFE53935);
+
+  // 메모지 색상 정의
+  static const Color memoYellow = Color(0xFFFFEB3B); // 노란 메모지
+  static const Color memoBlue = Color(0xFF90CAF9); // 파란 메모지
+  static const Color memoPink = Color(0xFFF48FB1); // 분홍 메모지
+  static const Color memoGreen = Color(0xFFA5D6A7); // 초록 메모지
+  static const Color memoOrange = Color(0xFFFFCC80); // 주황 메모지
+
+  // 메모지 색상 리스트
+  static const List<Color> memoColors = [
+    memoYellow,
+    memoBlue,
+    memoPink,
+    memoGreen,
+    memoOrange,
+  ];
 
   // 라이트 테마
   static final ThemeData lightTheme = ThemeData(
@@ -20,16 +38,22 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: backgroundColor,
     appBarTheme: const AppBarTheme(
-      backgroundColor: primaryColor,
-      foregroundColor: textColor,
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
       elevation: 0,
+      centerTitle: true,
+      iconTheme: IconThemeData(color: Colors.black),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: primaryColor,
-        foregroundColor: textColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        elevation: 0,
       ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(foregroundColor: Colors.black),
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: textColor, fontWeight: FontWeight.bold),
@@ -48,7 +72,7 @@ class AppTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: primaryColor, width: 2),
+        borderSide: const BorderSide(color: Colors.black, width: 2),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
@@ -56,29 +80,40 @@ class AppTheme {
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
     ),
+    cardTheme: CardTheme(
+      color: Colors.white,
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    ),
   );
 
   // 다크 테마
   static final ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.dark(
-      primary: primaryColor,
-      secondary: secondaryColor,
-      background: const Color(0xFF121212),
+      primary: Colors.white,
+      secondary: Colors.grey[800]!,
+      background: Colors.black,
       error: errorColor,
     ),
-    scaffoldBackgroundColor: const Color(0xFF121212),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFF1F1F1F),
+    scaffoldBackgroundColor: Colors.black,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.black,
       foregroundColor: Colors.white,
       elevation: 0,
+      centerTitle: true,
+      iconTheme: const IconThemeData(color: Colors.white),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: primaryColor,
+        backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        elevation: 0,
       ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(foregroundColor: Colors.white),
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -106,13 +141,18 @@ class AppTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: primaryColor, width: 2),
+        borderSide: const BorderSide(color: Colors.white, width: 2),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: const BorderSide(color: errorColor, width: 2),
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+    ),
+    cardTheme: CardTheme(
+      color: Colors.grey[900],
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
   );
 }

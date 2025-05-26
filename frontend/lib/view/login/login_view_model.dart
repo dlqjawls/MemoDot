@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../services/auth_service.dart';
+import 'package:memodot/services/auth_service.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final AuthService _authService;

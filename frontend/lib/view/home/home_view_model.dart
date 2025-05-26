@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../services/memo_service.dart';
+import 'package:memodot/services/memo_service.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final MemoService _memoService;

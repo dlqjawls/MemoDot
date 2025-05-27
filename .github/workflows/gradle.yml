@@ -61,7 +61,7 @@ jobs:
         ssh -i /home/runner/work/MemoDot/MemoDot/key.pem $EC2_USER@$EC2_HOST << 'EOF'
           pkill -f 'java -jar' || true
           nohup java -jar backend.jar &
-    EOF
+        EOF
 
         # Clean up
         rm -f /home/runner/work/Memodot/Memodot/key.pem

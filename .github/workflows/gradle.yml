@@ -42,13 +42,14 @@ jobs:
         echo 현재 위치 확인
         pwd
         echo PEM 키 생성하기
-        echo "$EC2_KEY" > key.pem
+        echo "$EC2_KEY" > /home/runner/work/MemoDot/MemoDot/key.pem
         echo pem키 생성 후 현재 위치 확인
         pwd
         echo pem키 생성 후 현재 디렉토리 파일 확인
         ls
-        chmod 600 /home/runner/work/backend/key.pem
-        # chmod 600 key.pem
+        chmod 600 /home/runner/work/MemoDot/MemoDot/key.pem
+        
+        # chmod 600 /home/runner/work/MemoDot/MemoDot/backend/key.pem
 
         # Transfer files to EC2
         # echo /home/runner/work/backend/backend/key.pem 경로 디렉토리 확인
@@ -58,7 +59,7 @@ jobs:
         echo scp 시작 
         
         # 싱글 스레드 전송 
-        scp -o StrictHostKeyChecking=no -C -i /home/runner/work/backend/key.pem -r /home/runner/work/backend/build/libs/backend.jar $EC2_USER@$EC2_HOST:/home/$EC2_USER/
+        scp -o StrictHostKeyChecking=no -C -i /home/runner/work/Memodot/Memodot/key.pem -r /home/runner/work/Memodot/Memodot/backend/build/libs/backend.jar $EC2_USER@$EC2_HOST:/home/$EC2_USER/
 
         # SSH into EC2 and restart the application
         ssh -i key.pem $EC2_USER@$EC2_HOST << 'EOF'
@@ -67,4 +68,4 @@ jobs:
         EOF
 
         # Clean up
-        rm -f key.pem
+        rm -f /home/runner/work/Memodot/Memodot/key.pem

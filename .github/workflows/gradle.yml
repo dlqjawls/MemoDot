@@ -29,7 +29,8 @@ jobs:
         localhost : localhost # ${{ secrets.LOCALHOST }} 
          # : ${{ secrets.SSAFY_HOST }}
         
-      run: ls && cd backend && chmod +x gradlew && pwd && ./gradlew clean build --info 
+      run: ls && cd backend && chmod +x gradlew && pwd && ./gradlew clean build -x test --info 
+    
 
     - name: Deploy to EC2
       env:

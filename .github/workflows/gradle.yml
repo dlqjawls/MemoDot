@@ -35,7 +35,7 @@ jobs:
       env:
         EC2_HOST: 15.164.233.145          # ${{ secrets.SSAFY_HOST }}   # secrets.SSAFY_HOST
         EC2_USER: ubuntu                   # ${{ secrets.SSAFY_USER }}   # secrets.SSAFY_USER
-        EC2_KEY: ${{ secrets.SSAFY_KEY }}     # secrets.SSAFY_KEY
+        EC2_KEY: ${{ secrets.EC2_KEY }}     # secrets.SSAFY_KEY
       run: |
         # Create SSH key
         echo 현재 위치 확인

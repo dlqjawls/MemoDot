@@ -9,22 +9,26 @@ import 'package:memodot/utils/validator.dart';
 import 'package:memodot/widgets/custom_button.dart';
 import 'package:memodot/widgets/custom_text_field.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
+    _usernameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -32,13 +36,17 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       final authService = Provider.of<AuthService>(context, listen: false);
 
-      final success = await authService.login(
+      final success = await authService.register(
+        _usernameController.text.trim(),
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
 
       if (success && mounted) {
-        context.go('/home');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('회원가입이 완료되었습니다. 로그인해주세요.')),
+        );
+        context.go('/login');
       }
     }
   }
@@ -49,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('로그인'),
+        title: const Text('회원가입'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/'),
@@ -67,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   SizedBox(height: 20.h),
                   Text(
-                    'MemoDot에 오신 것을 환영합니다',
+                    '새로운 계정을 만들어보세요',
                     style: TextStyle(
                       fontSize: 16.sp,
                       color: AppTheme.subtleTextColor,
@@ -75,7 +83,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 40.h),
 
-                  // 이메일 필드
+                  // 사용자 이름
+                  CustomTextField(
+                    controller: _usernameController,
+                    hintText: '사용자 이름',
+                    labelText: '사용자 이름',
+                    prefixIcon: const Icon(Icons.person),
+                    validator: Validator.validateUsername,
+                  ),
+                  SizedBox(height: 16.h),
+
+                  // 이메일
                   CustomTextField(
                     controller: _emailController,
                     hintText: '이메일',
@@ -86,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 16.h),
 
-                  // 비밀번호 필드
+                  // 비밀번호
                   CustomTextField(
                     controller: _passwordController,
                     hintText: '비밀번호',
@@ -95,30 +113,30 @@ class _LoginScreenState extends State<LoginScreen> {
                     prefixIcon: const Icon(Icons.lock),
                     validator: Validator.validatePassword,
                   ),
+                  SizedBox(height: 16.h),
+
+                  // 비밀번호 확인
+                  CustomTextField(
+                    controller: _confirmPasswordController,
+                    hintText: '비밀번호 확인',
+                    labelText: '비밀번호 확인',
+                    obscureText: true,
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    validator:
+                        (value) => Validator.validateConfirmPassword(
+                          value,
+                          _passwordController.text,
+                        ),
+                  ),
                   SizedBox(height: 40.h),
 
-                  // 로그인 버튼
+                  // 회원가입 버튼
                   CustomButton(
-                    text: '로그인',
+                    text: '회원가입',
                     onPressed: _submitForm,
                     isLoading: authService.isLoading,
                     backgroundColor: Colors.black,
                     textColor: Colors.white,
-                  ),
-                  SizedBox(height: 16.h),
-
-                  // 회원가입으로 이동 버튼
-                  Center(
-                    child: TextButton(
-                      onPressed: () => context.go('/signup'),
-                      child: Text(
-                        '계정이 없으신가요? 회원가입',
-                        style: TextStyle(
-                          color: AppTheme.secondaryColor,
-                          fontSize: 14.sp,
-                        ),
-                      ),
-                    ),
                   ),
 
                   // 에러 메시지 표시

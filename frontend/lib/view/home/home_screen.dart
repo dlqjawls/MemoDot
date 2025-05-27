@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/theme.dart';
-import '../../models/memo_model.dart';
-import '../../services/auth_service.dart';
-import '../../services/memo_service.dart';
-import '../../widgets/custom_button.dart';
+import 'package:memodot/core/theme.dart';
+import 'package:memodot/models/memo_model.dart';
+import 'package:memodot/services/auth_service.dart';
+import 'package:memodot/services/memo_service.dart';
+import 'package:memodot/widgets/custom_button.dart';
 import 'home_view_model.dart';
 
 class HomeScreen extends StatefulWidget {

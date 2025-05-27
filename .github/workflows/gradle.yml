@@ -58,7 +58,7 @@ jobs:
 
         # 병렬전송
         rsync --info=progress2 -e "ssh -i key.pem -o StrictHostKeyChecking=no" \
-        /path/to/backend.jar ubuntu@${EC2_HOST}:/home/ubuntu/
+        /home/runner/work/MemoDot/MemoDot/backend/build/libs/backend.jar ubuntu@${EC2_HOST}:/home/ubuntu/
 
 
         

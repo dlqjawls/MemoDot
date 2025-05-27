@@ -55,7 +55,7 @@ jobs:
         ls /home/runner/work/Memodot/Memodot/backend/build/
         ls /home/runner/work/Memodot/Memodot/backend/build/libs/
         # 싱글 스레드 전송 
-        scp -o StrictHostKeyChecking=no -C -i /home/runner/work/Memodot/Memodot/key.pem -r /home/runner/work/Memodot/Memodot/backend/build/libs/backend.jar $EC2_USER@$EC2_HOST:/home/$EC2_USER/
+        scp -o StrictHostKeyChecking=no -C -i /home/runner/work/MemoDot/MemoDot/key.pem -r /home/runner/work/MemoDot/MemoDot/backend/build/libs/backend.jar $EC2_USER@$EC2_HOST:/home/$EC2_USER/
 
         # SSH into EC2 and restart the application
         ssh -i key.pem $EC2_USER@$EC2_HOST << 'EOF'

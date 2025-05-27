@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master" ] 
+  pull_request:
+    branches: [ "master" ]
+
+jobs: 
+  build: 
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+
+    - name: Gradle Build
+      env:
+        localhost : localhost # ${{ secrets.LOCALHOST }} 
+         # : ${{ secrets.SSAFY_HOST }}
+        
+      run: ls && cd backend && chmod +x gradlew && pwd && ./gradlew clean build --info 
+
+    - name: Deploy to EC2
+      env:
+        EC2_HOST: 15.164.233.145          # ${{ secrets.SSAFY_HOST }}   # secrets.SSAFY_HOST
+        EC2_USER: ubuntu                   # ${{ secrets.SSAFY_USER }}   # secrets.SSAFY_USER
+        EC2_KEY: ${{ secrets.SSAFY_KEY }}     # secrets.SSAFY_KEY
+      run: |
+        # Create SSH key
+        echo 현재 위치 확인
+        pwd
+        echo PEM 키 생성하기
+        echo "$EC2_KEY" > key.pem
+        echo pem키 생성 후 현재 위치 확인
+        pwd
+        echo pem키 생성 후 현재 디렉토리 파일 확인
+        ls
+        chmod 600 /home/runner/work/backend/key.pem
+        # chmod 600 key.pem
+
+        # Transfer files to EC2
+        # echo /home/runner/work/backend/backend/key.pem 경로 디렉토리 확인
+        # ls /home/runner/work/backend/backend/
+        # echo /home/runner/work/backend/backend/backend/build/libs/ 경로 디렉토리 확인
+        # ls /home/runner/work/backend/backend/backend/build/libs/
+        echo scp 시작 
+        
+        # 싱글 스레드 전송 
+        scp -o StrictHostKeyChecking=no -C -i /home/runner/work/backend/key.pem -r /home/runner/work/backend/build/libs/backend.jar $EC2_USER@$EC2_HOST:/home/$EC2_USER/
+
+        # SSH into EC2 and restart the application
+        ssh -i key.pem $EC2_USER@$EC2_HOST << 'EOF'
+          pkill -f 'java -jar' || true
+          nohup java -jar backend.jar &
+        EOF
+
+        # Clean up
+        rm -f key.pem

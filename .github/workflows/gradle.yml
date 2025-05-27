@@ -53,8 +53,13 @@ jobs:
         echo scp 시작 
         ls /home/runner/work/MemoDot/MemoDot/backend/build/libs/
         # 싱글 스레드 전송 
-        scp -o StrictHostKeyChecking=no -vvv -i /home/runner/work/MemoDot/MemoDot/key.pem /home/runner/work/MemoDot/MemoDot/backend/build/libs/backend.jar $EC2_USER@$EC2_HOST:/home/$EC2_USER/
+        # scp -o StrictHostKeyChecking=no -vvv -i /home/runner/work/MemoDot/MemoDot/key.pem /home/runner/work/MemoDot/MemoDot/backend/build/libs/backend.jar $EC2_USER@$EC2_HOST:/home/$EC2_USER/
         # -C
+
+        # 병렬전송
+        rsync --info=progress2 -e "ssh -i key.pem -o StrictHostKeyChecking=no" \
+        /path/to/backend.jar ubuntu@${EC2_HOST}:/home/ubuntu/
+
 
         
         # SSH into EC2 and restart the application

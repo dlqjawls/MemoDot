@@ -48,16 +48,12 @@ jobs:
         echo pem키 생성 후 현재 디렉토리 파일 확인
         ls
         chmod 600 /home/runner/work/MemoDot/MemoDot/key.pem
-        
-        # chmod 600 /home/runner/work/MemoDot/MemoDot/backend/key.pem
 
         # Transfer files to EC2
-        # echo /home/runner/work/backend/backend/key.pem 경로 디렉토리 확인
-        # ls /home/runner/work/backend/backend/
-        # echo /home/runner/work/backend/backend/backend/build/libs/ 경로 디렉토리 확인
-        # ls /home/runner/work/backend/backend/backend/build/libs/
         echo scp 시작 
-        
+        ls /home/runner/work/Memodot/Memodot/backend/
+        ls /home/runner/work/Memodot/Memodot/backend/build/
+        ls /home/runner/work/Memodot/Memodot/backend/build/libs/
         # 싱글 스레드 전송 
         scp -o StrictHostKeyChecking=no -C -i /home/runner/work/Memodot/Memodot/key.pem -r /home/runner/work/Memodot/Memodot/backend/build/libs/backend.jar $EC2_USER@$EC2_HOST:/home/$EC2_USER/
 

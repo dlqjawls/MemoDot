@@ -63,9 +63,10 @@ jobs:
 
         
         # SSH into EC2 and restart the application
-        ssh -i /home/runner/work/MemoDot/MemoDot/key.pem $EC2_USER@$EC2_HOST \  # << 'EOF'
-          "pkill -f 'java -jar' || true && nohup java -jar backend.jar &"
-        # EOF
+        ssh -i /home/runner/work/MemoDot/MemoDot/key.pem $EC2_USER@$EC2_HOST << 'EOF'
+          pkill -f 'java -jar' || true
+          nohup java -jar backend.jar &
+        EOF
 
         # Clean up
         rm -f /home/runner/work/MemoDot/MemoDot/key.pem

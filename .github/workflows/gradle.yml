@@ -64,4 +64,4 @@ jobs:
         EOF
 
         # Clean up
-        rm -f /home/runner/work/Memodot/Memodot/key.pem
+        rm -f /home/runner/work/MemoDot/MemoDot/key.pem

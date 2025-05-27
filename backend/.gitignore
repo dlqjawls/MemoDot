@@ -6,7 +6,9 @@ build/
 !**/src/test/**/build/
 
 !**/src/main/resources/**
-**/src/main/resources/**
+
+# application.yml untracked 해제
+#**/src/main/resources/**
 
 ### STS ###
 .apt_generated

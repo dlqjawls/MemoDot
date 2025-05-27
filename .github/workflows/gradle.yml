@@ -34,7 +34,7 @@ jobs:
 
     - name: Deploy to EC2
       env:
-        EC2_HOST: 15.164.233.145          # ${{ secrets.SSAFY_HOST }}   # secrets.SSAFY_HOST
+        EC2_HOST: 43.201.133.116          # ${{ secrets.SSAFY_HOST }}   # secrets.SSAFY_HOST
         EC2_USER: ubuntu                   # ${{ secrets.SSAFY_USER }}   # secrets.SSAFY_USER
         EC2_KEY: ${{ secrets.EC2_KEY }}     # secrets.SSAFY_KEY
       run: |

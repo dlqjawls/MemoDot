@@ -55,13 +55,14 @@ jobs:
         ls /home/runner/work/MemoDot/MemoDot/backend/build/
         ls /home/runner/work/MemoDot/MemoDot/backend/build/libs/
         # 싱글 스레드 전송 
-        scp -o StrictHostKeyChecking=no -vvv -C -i /home/runner/work/MemoDot/MemoDot/key.pem /home/runner/work/MemoDot/MemoDot/backend/build/libs/backend.jar $EC2_USER@$EC2_HOST:/home/$EC2_USER/
+        scp -o StrictHostKeyChecking=no -vvv -i /home/runner/work/MemoDot/MemoDot/key.pem /home/runner/work/MemoDot/MemoDot/backend/build/libs/backend.jar $EC2_USER@$EC2_HOST:/home/$EC2_USER/
+        # -C
 
+        
         # SSH into EC2 and restart the application
-        ssh -i /home/runner/work/MemoDot/MemoDot/key.pem $EC2_USER@$EC2_HOST << 'EOF'
-          pkill -f 'java -jar' || true
-          nohup java -jar backend.jar &
-        EOF
+        ssh -i /home/runner/work/MemoDot/MemoDot/key.pem $EC2_USER@$EC2_HOST \  # << 'EOF'
+          "pkill -f 'java -jar' || true && nohup java -jar backend.jar &"
+        # EOF
 
         # Clean up
         rm -f /home/runner/work/MemoDot/MemoDot/key.pem

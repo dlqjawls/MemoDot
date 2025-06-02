@@ -47,7 +47,7 @@ jobs:
         pwd
         echo pem키 생성 후 현재 디렉토리 파일 확인
         ls
-        chmod 600 /home/runner/work/MemoDot/MemoDot/key.pem
+        chmod 600 /home/runner/work/MemoDot/MemoDot/key.pem 
 
         # Transfer files to EC2
         echo scp 시작 

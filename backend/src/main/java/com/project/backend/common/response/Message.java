@@ -17,7 +17,15 @@ public enum Message {
     METHOD_NOT_ALLOWED,
     HTTP_MEDIA_TYPE_NOT_ACCEPTABLE,
     INVALID_DATA_ACCESS_API_USAGE,
-    INTERNAL_SERVER_ERROR
+    INTERNAL_SERVER_ERROR,
+
+
+
+    /**
+    * 범진 커스텀 시작
+    * **/
+    
+    범진이_잘못임_아무튼_무조건_범진이_잘못임
 
 
 }

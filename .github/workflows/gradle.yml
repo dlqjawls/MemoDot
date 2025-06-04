@@ -8,7 +8,7 @@ on:
 
 jobs: 
   build: 
- 
+  
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -23,6 +23,10 @@ jobs:
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+      with:
+          # gradle-version: '8.14.1'
+          cache-disabled: true       # ← 여기만 true로 바꿔주세요
+          cache-cleanup: none  
 
     - name: Gradle Build
       env:
@@ -47,7 +51,7 @@ jobs:
         pwd
         echo pem키 생성 후 현재 디렉토리 파일 확인
         ls
-        chmod 600 /home/runner/work/MemoDot/MemoDot/key.pem
+        chmod 600 /home/runner/work/MemoDot/MemoDot/key.pem 
 
         # Transfer files to EC2
         echo scp 시작 
@@ -65,7 +69,8 @@ jobs:
         # SSH into EC2 and restart the application
         ssh -i /home/runner/work/MemoDot/MemoDot/key.pem $EC2_USER@$EC2_HOST << 'EOF'
           pkill -f 'java -jar' || true
-          nohup java -jar backend.jar &
+          nohup java -jar backend.jar > /dev/null 2>&1 &
+          exit
         EOF
 
         # Clean up

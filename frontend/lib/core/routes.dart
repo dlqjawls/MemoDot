@@ -7,6 +7,7 @@ import 'package:memodot/view/login/login_screen.dart';
 import 'package:memodot/view/login/signup_screen.dart';
 import 'package:memodot/view/login/welcome_screen.dart';
 import 'package:memodot/view/settings/settings_screen.dart';
+import 'package:memodot/view/calendar/calendar_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -33,6 +34,10 @@ class AppRouter {
       GoRoute(
         path: '/settings',
         builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: '/calendar',
+        builder: (context, state) => const CalendarScreen(),
       ),
     ],
     errorBuilder:

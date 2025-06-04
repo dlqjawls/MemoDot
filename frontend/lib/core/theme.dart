@@ -80,11 +80,13 @@ class AppTheme {
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
     ),
-    cardTheme: CardTheme(
-      color: Colors.white,
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    ),
+   cardTheme: const CardThemeData(
+  elevation: 2,
+  surfaceTintColor: Colors.transparent, // M3 기본 tint 제거
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(12)),
+  ),
+),  
   );
 
   // 다크 테마
@@ -149,10 +151,13 @@ class AppTheme {
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
     ),
-    cardTheme: CardTheme(
-      color: Colors.grey[900],
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    ),
+    cardTheme: CardThemeData(
+  color: Colors.grey[900],
+  elevation: 2,
+  surfaceTintColor: Colors.transparent,
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(12)),
+  ),
+),
   );
 }

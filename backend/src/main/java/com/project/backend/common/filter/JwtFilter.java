@@ -17,7 +17,7 @@ import java.util.Arrays;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    private static final String[] PUBLIC_URL = {"/users/login", "/users/join"};
+    private static final String[] PUBLIC_URL = {"/users/login", "/users/join", "/k6/gen-script"};
 
     private final JwtUtil jwtUtil;
 

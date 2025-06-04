@@ -13,8 +13,8 @@ import java.util.Date;
 public class JwtUtil {
     
     /** 필드 **/
-    private final Long ACCESS_TOKEN_EXPIRATION = 1000 * 60 * 10L; // 10분
-    private final Long REFRESH_TOKEN_EXPIRATION = 1000 * 60 * 60L; // 60분
+    private final Long ACCESS_TOKEN_EXPIRATION = 1000 * 60 * 60L; // 1시간
+    private final Long REFRESH_TOKEN_EXPIRATION = 1000 * 60 * 60 * 24L; // 1일
 
     private final SecretKey secretKey;
     private final String SECRET = "THISISNOTSECRETKEYTHISISNOTSECRETKEY";

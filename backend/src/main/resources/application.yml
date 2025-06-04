@@ -16,3 +16,7 @@ spring:
     generate-ddl: true
     show-sql: true
 
+k6:
+  weaver:
+    base-url: "http://localhost:8080"
+    base-package: "com.project.backend"
